@@ -3,7 +3,6 @@ require 'active_support/core_ext'
 require_relative 'project'
 require_relative 'revision'
 require_relative 'commit'
-require_relative 'svn_info_element'
 
 # Finds revisions for specific project
 def find_revisions(data, project)
