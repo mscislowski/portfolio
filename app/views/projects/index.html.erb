@@ -1,19 +1,28 @@
 <% content_for :title do %>Projects<% end %>
 <h3>Projects worked on by Matt Scislowski</h3>
 <p>
-  Current projects:
-<table class = 'table'>
-  <thead>
-  <tr>
-    <th>Title:</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @projects.each do |project| %>
-      <tr>
-        <td><% link_to(project.title, project.path) %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+  <h5>Current projects:</h5>
+  <table class = 'table'>
+    <thead>
+    <tr>
+      <th class="col-md-2 text-xs-left">Title:</th>
+      <th class="col-md-2 text-xs-left">Latest revision:</th>
+      <th class="col-md-2 text-xs-left">Latest update:</th>
+      <th class="col-md-2 text-xs-left">Latest commit message:</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td class="col-md-1 text-xs-left"><%= link_to project.title, project.path + '/' + project.title %></td>
+          <td class="col-md-1 text-xs-left"><%= a = project.revisions.sort_by { |a| -a[:revision]}
+                                a[0][:revision].to_s %></td>
+          <td class="col-md-1 text-xs-left"><%= a = project.revisions.sort_by { |a| -a[:date]}
+                                a[0][:date].to_s[0..9] %></td>
+          <td class="col-md-1 text-xs-left"><%= a = project.revisions.sort_by { |a| -a[:revision]}
+                                                a[0][:msg] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </p>

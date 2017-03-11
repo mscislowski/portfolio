@@ -1,12 +1,14 @@
-require 'nokogiri'
 require 'active_record'
 
-class SVN_Info < ActiveRecord::Base
+class Project < ActiveRecord::Base
+  has_many :revisions
+end
 
-  xml = File.open('/Users/mscislowski/Documents/cs242/Assignment3.0/portfolio/app/models/data/svn_list.xml')
-  puts xml
-  hash = Hash.from_xml(xml)
-  puts hash
-  json = hash.to_json
-  push json
+class Revision < ActiveRecord::Base
+  belongs_to :project
+  has_many :commits
+end
+
+class Commit < ActiveRecord::Base
+  belongs_to :revision
 end

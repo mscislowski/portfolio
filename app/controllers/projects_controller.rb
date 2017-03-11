@@ -1,11 +1,10 @@
-class ContentController < ApplicationController
-  include HighVoltage::StaticPage
+class ProjectsController < ApplicationController
+  before_action :get_projects
 
-  def show
-    @projects = Project.all
-
+  def new
   end
-  def projects
+
+  def get_projects
     @projects = Project.all
   end
 end

@@ -1,2 +1,6 @@
 <%# add navigation links to this file %>
+<li class='nav-item'><%= link_to 'Home', root_path, class: 'nav-link' %></li>
+<li class='nav-item'><%= link_to 'Projects', page_path('../projects'), class: 'nav-link' %></li>
+<li class='nav-item'><%= link_to 'Revisions', page_path('../projects/revisions'), class: 'nav-link' %></li>
+<li class='nav-item'><%= link_to 'Commits', page_path('../projects/commits'), class: 'nav-link' %></li>
 <li class='nav-item'><%= link_to 'About', page_path('about'), class: 'nav-link' %></li>

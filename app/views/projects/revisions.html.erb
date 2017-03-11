@@ -1,1 +1,28 @@
-<h2>HI</h2>
+<% content_for :title do %>Revisions<% end %>
+<h3>Revisions for each project</h3>
+<p>
+  <% @projects.each do |project| %>
+    <table class = 'table'>
+      <h5><%= project.title %></h5>
+      <thead>
+      <tr>
+        <th class="col-md-2 text-xs-left">Revision:</th>
+        <th class="col-md-2 text-xs-left">Author:</th>
+        <th class="col-md-2 text-xs-left">Date:</th>
+        <th class="col-md-2 text-xs-left">Message:</th>
+      </tr>
+      </thead>
+      <% a = project.revisions.sort_by { |a| -a['revision']}
+         a.each do |revision| %>
+        <tbody>
+            <tr>
+              <td class="col-md-1 text-xs-left"><%= link_to revision.revision.to_s, project.path + '/' + project.title + '/?p=' + revision.revision.to_s %></td>
+              <td class="col-md-1 text-xs-left"><%= revision.author %></td>
+              <td class="col-md-1 text-xs-left"><%= revision.date[0..9] %></td>
+              <td class="col-md-4 text-xs-left"><%= revision.msg %></td>
+            </tr>
+        </tbody>
+      <% end %>
+    </table>
+  <% end %>
+</p>

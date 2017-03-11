@@ -1,0 +1,52 @@
+<% content_for :title do %>Commits<% end %>
+<h3>Revisions for each project</h3>
+<p>
+  <% @projects.each do |project| %>
+    <table class = 'table'>
+      <h5><%= project.title %></h5>
+      <thead>
+      <tr>
+        <th class="col-md-2 text-xs-left">Revision:</th>
+        <th class="col-md-6 text-xs-left">Committed Message:</th>
+      </tr>
+      </thead>
+      <% a = project.revisions.sort_by { |a| -a['revision']}
+         a.each do |revision| %>
+          <tbody>
+          <tr>
+            <td class="col-md-1 text-xs-left"><%= link_to revision.revision.to_s, project.path + '/' + project.title + '/?p=' + revision.revision.to_s %></td>
+            <td class="col-md-6 text-xs-left">
+              <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#<%= revision.revision.to_s %>">
+                <% c_msg = revision.msg
+                  if c_msg == nil
+                    c_msg = 'No message committed'
+                  end
+                %>
+                    <%= c_msg %>
+                    </button>
+              <div class="collapse" id="<%= revision.revision.to_s %>">
+                <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="col-md-1 text-xs-left">Name:</th>
+                          <th class="col-md-1 text-xs-left">Kind:</th>
+                          <th class="col-md-1 text-xs-left">Date:</th>
+                        </tr>
+                      </thead>
+                  <% b = revision.commits.sort_by { |b| -b['date']}
+                     b.each do |commit| %>
+                      <tbody>
+                        <td class="col-md-1 text-xs-left"><%= link_to commit.name, project.path + '/' + commit.name %></td>
+                        <td class="col-md-1 text-xs-left"><%= commit.kind %></td>
+                        <td class="col-md-1 text-xs-left"><%= commit.date[0..9] %></td>
+                      </tbody>
+                  <% end %>
+                </table>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+      <% end %>
+    </table>
+<% end %>
+</p>
