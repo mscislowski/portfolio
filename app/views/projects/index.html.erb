@@ -1,0 +1,19 @@
+<% content_for :title do %>Projects<% end %>
+<h3>Projects worked on by Matt Scislowski</h3>
+<p>
+  Current projects:
+<table class = 'table'>
+  <thead>
+  <tr>
+    <th>Title:</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @projects.each do |project| %>
+      <tr>
+        <td><% link_to(project.title, project.path) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+</p>
